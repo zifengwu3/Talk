@@ -17,13 +17,30 @@ JNIEXPORT void JNICALL native_start_talk(JNIEnv *, jobject, jstring, jstring);
 /*
  * Class:     com_qsa_talk_libstalk
  * Method:    stop_talk
- * Signature: ()Ljava/lang/String;
+ * Signature: ()V
  */
 JNIEXPORT void JNICALL native_stop_talk(JNIEnv *, jobject);
+
+/*
+ * Class:     com_qsa_talk_libstalk
+ * Method:    start_audio
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL native_start_audio(JNIEnv *, jobject);
+
+/*
+ * Class:     com_qsa_talk_libstalk
+ * Method:    start_video
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL native_start_video(JNIEnv *, jobject);
+
 
 #else
 extern JNIEXPORT void JNICALL native_start_talk(JNIEnv *, jobject, jstring, jstring);
 extern JNIEXPORT void JNICALL native_stop_talk(JNIEnv *, jobject);
+extern JNIEXPORT void JNICALL native_start_audio(JNIEnv *, jobject);
+extern JNIEXPORT void JNICALL native_start_video(JNIEnv *, jobject);
 #endif
 #ifdef __cplusplus
 }

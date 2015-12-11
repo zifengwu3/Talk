@@ -16,7 +16,7 @@
  */
 
 JNIEXPORT void JNICALL native_start_talk(JNIEnv *env, jobject obj, jstring ip, jstring number) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "Good Hello World!"));
+	LOGI(TAG, ( *env )->NewStringUTF(env, "Start Talk"));
 	return;
 }
 
@@ -26,6 +26,27 @@ JNIEXPORT void JNICALL native_start_talk(JNIEnv *env, jobject obj, jstring ip, j
  * Signature: ()V;
  */
 JNIEXPORT void JNICALL native_stop_talk(JNIEnv *env, jobject obj) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "GoodBye World!"));
+	LOGI(TAG, ( *env )->NewStringUTF(env, "Stop Talk"));
 	return;
 }
+
+/*
+ * Class:     com_qsa_talk_libstalk
+ * Method:    start_audio
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL native_start_audio(JNIEnv *env, jobject obj) {
+	LOGI(TAG, ( *env )->NewStringUTF(env, "Start Audio"));
+	return;
+}
+
+/*
+ * Class:     com_qsa_talk_libstalk
+ * Method:    start_video
+ * Signature: ()V
+ */
+JNIEXPORT void JNICALL native_start_video(JNIEnv *env, jobject obj) {
+	LOGI(TAG, ( *env )->NewStringUTF(env, "Start Video"));
+	return;
+}
+

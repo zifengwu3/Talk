@@ -63,6 +63,8 @@ static int registerNativeMethods(JNIEnv *env, const char * className,
 static JNINativeMethod method_table[] = {
         {"start_talk", "(Ljava/lang/String;Ljava/lang/String;)V", (void *)native_start_talk},
         {"stop_talk", "()V", (void *)native_stop_talk},
+        {"start_video", "()V", (void *)native_start_video},
+        {"start_audio", "()V", (void *)native_start_audio},
 };
 
 /*

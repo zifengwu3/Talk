@@ -14,27 +14,41 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
     }
     public static final class id {
-        public static final int btn_call=0x7f060000;
-        public static final int btn_hangup=0x7f060003;
-        public static final int btn_start_audio=0x7f060007;
-        public static final int btn_start_video=0x7f060001;
-        public static final int editText1=0x7f060005;
-        public static final int edt_input_ip=0x7f060002;
-        public static final int edt_input_number1=0x7f060004;
-        public static final int txt_state=0x7f060006;
+        public static final int btn_call=0x7f070000;
+        public static final int btn_hangup=0x7f070003;
+        public static final int btn_start_audio=0x7f070007;
+        public static final int btn_start_video=0x7f070001;
+        public static final int editText1=0x7f070005;
+        public static final int edt_input_ip=0x7f070002;
+        public static final int edt_input_number1=0x7f070004;
+        public static final int txt_state=0x7f070006;
+    }
+    public static final class integer {
+        public static final int KEY_0=0x7f040000;
+        public static final int KEY_1=0x7f040001;
+        public static final int KEY_2=0x7f040002;
+        public static final int KEY_3=0x7f040003;
+        public static final int KEY_4=0x7f040004;
+        public static final int KEY_5=0x7f040005;
+        public static final int KEY_6=0x7f040006;
+        public static final int KEY_7=0x7f040007;
+        public static final int KEY_8=0x7f040008;
+        public static final int KEY_9=0x7f040009;
+        public static final int KEY_BS=0x7f04000a;
+        public static final int KEY_OK=0x7f04000b;
     }
     public static final class layout {
         public static final int activity_call=0x7f030000;
     }
     public static final class string {
-        public static final int app_name=0x7f040000;
-        public static final int btn_call=0x7f040001;
-        public static final int btn_hangup=0x7f040002;
-        public static final int btn_start_audio=0x7f040006;
-        public static final int btn_start_video=0x7f040007;
-        public static final int edt_input_ip=0x7f040004;
-        public static final int edt_input_number=0x7f040005;
-        public static final int txt_state=0x7f040003;
+        public static final int app_name=0x7f050000;
+        public static final int btn_call=0x7f050001;
+        public static final int btn_hangup=0x7f050002;
+        public static final int btn_start_audio=0x7f050006;
+        public static final int btn_start_video=0x7f050007;
+        public static final int edt_input_ip=0x7f050004;
+        public static final int edt_input_number=0x7f050005;
+        public static final int txt_state=0x7f050003;
     }
     public static final class style {
         /** 
@@ -58,10 +72,10 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f050000;
+        public static final int AppBaseTheme=0x7f060000;
         /**  Application theme. 
  All customizations that are NOT specific to a particular API-level can go here. 
          */
-        public static final int AppTheme=0x7f050001;
+        public static final int AppTheme=0x7f060001;
     }
 }

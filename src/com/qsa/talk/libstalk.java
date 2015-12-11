@@ -14,5 +14,7 @@ public class libstalk {
     //native method
     public native void start_talk(String ip,String number);
     public native void stop_talk();
+    public native void start_audio();
+    public native void start_video();
 
 }

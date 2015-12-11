@@ -62,7 +62,26 @@ public class Call extends Activity implements OnClickListener {
 		keyValue = keyCode - 7;
 		Log.v(TAG, "keycode = " + keyValue);
 		switch (keyValue) {
-		case 11:
+		case R.integer.KEY_0:
+		case R.integer.KEY_1:
+		case R.integer.KEY_2:
+		case R.integer.KEY_4:
+		case R.integer.KEY_5:
+		case R.integer.KEY_7:
+		case R.integer.KEY_8:
+		case R.integer.KEY_9:
+			break;
+		case R.integer.KEY_3:
+			/* value and up */
+			break;
+		case R.integer.KEY_6:
+			/* value and down */
+			break;
+		case R.integer.KEY_BS:
+			/* delete number */
+			break;
+		case R.integer.KEY_OK:
+			/* ok */
 			btn_call.callOnClick();
 			break;
 		default:
@@ -76,16 +95,19 @@ public class Call extends Activity implements OnClickListener {
 		switch (view.getId()) {
 		case R.id.btn_call:
 			Log.i(TAG, "call");
-			//mlibstalk.start_talk(edit_ip, edit_number);
+			mlibstalk.start_talk("192.168.10.189", "0606");
 			break;
 		case R.id.btn_hangup:
 			Log.i(TAG, "hangup");
+			mlibstalk.stop_talk();
 			break;
 		case R.id.btn_start_audio:
-			Log.i(TAG, "start_video");
+			Log.i(TAG, "start_audio");
+			mlibstalk.start_audio();
 			break;
 		case R.id.btn_start_video:
-			Log.i(TAG, "start_audio");
+			Log.i(TAG, "start_video");
+			mlibstalk.start_video();
 			break;
 		default:
 			break;

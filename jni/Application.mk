@@ -6,6 +6,7 @@ APP_ABI := armeabi-v7a
 #APP_ABI := armeabi
 
 TALK_ROOT=$(APP_PROJECT_PATH)/talk
+COMM_ROOT=$(APP_PROJECT_PATH)/comm
 
 #YKDROID_ROOT=$(YK-IDBT_ROOT)/ykdroid
 #ANDROID_INC=$(YK-IDBT_ROOT)/LP/INC/android
@@ -26,6 +27,10 @@ APP_CFLAGS := -Wno-error=format-security
 TALK_C_INCLUDES := \
 	$(APP_PROJECT_PATH)/include \
 	$(TALK_ROOT)/include
+
+COMM_C_INCLUDES := \
+	$(APP_PROJECT_PATH)/include \
+	$(COMM_ROOT)/include
 	
 	#$(YK-IDBT_ROOT)/LP/INC/android/frameworks/base/include/media/stagefright/openmax \
 	$(YK-IDBT_ROOT)/NewQS			\

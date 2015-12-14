@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//jni/comm/include/comm.h=GB2312
+encoding//jni/comm/include/common.h=UTF-8
 encoding//jni/talk/video_send.c=UTF-8

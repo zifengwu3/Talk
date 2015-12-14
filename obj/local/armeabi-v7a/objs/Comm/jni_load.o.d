@@ -1,4 +1,4 @@
-obj/local/armeabi-v7a/objs/Talk/jni_load.o: jni/jni_load.c \
+obj/local/armeabi-v7a/objs/Comm/jni_load.o: jni/jni_load.c \
  jni/include/log_jni.h \
  /home/l/android/sdk/ndk-bundle/platforms/android-17/arch-arm/usr/include/jni.h \
  /home/l/android/sdk/ndk-bundle/platforms/android-17/arch-arm/usr/include/sys/cdefs.h \

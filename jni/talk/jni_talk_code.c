@@ -7,7 +7,7 @@
 #define _Included_Jni_Load
 #include "jni_load.h"
 
-#include "code_c_in_java.h"
+#include "jni_talk_code.h"
 
 /*
  * Class:     com_qsa_talk_libstalk

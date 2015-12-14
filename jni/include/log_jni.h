@@ -11,7 +11,7 @@
 /**
  * 定义log标签
  */
-#define TAG "jni_qsatalk"
+#define TAG "jni_log"
 
 /**
  * 定义verbose信息

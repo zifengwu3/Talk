@@ -4,6 +4,8 @@ APP_BUILD_SCRIPT := $(call my-dir)/Android.mk
 APP_PLATFORM := android-17
 APP_ABI := armeabi-v7a
 #APP_ABI := armeabi
+APP_OPTIM := debug
+#APP_OPTIM := release
 
 TALK_ROOT=$(APP_PROJECT_PATH)/talk
 COMM_ROOT=$(APP_PROJECT_PATH)/comm

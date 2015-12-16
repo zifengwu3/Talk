@@ -5,6 +5,7 @@
 
 #include "log_jni.h"
 #include "string.h"
+#include <jni.h>
 
 /*
  * 设置string处理的编码

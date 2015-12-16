@@ -6,14 +6,25 @@ LOCAL_SRC_FILES := share_libs/libserial_port.so
 include $(PREBUILT_SHARED_LIBRARY) 	
 
 include $(CLEAR_VARS)
-CUR_COMM_FOLDER := comm
 LOCAL_MODULE    := Comm
 LOCAL_ARM_MODE  := arm
 LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
 LOCAL_C_INCLUDES := $(COMM_C_INCLUDES)
 
+#Tag Flag
+MY_LOG_TAG := \"jni_log\"
+
+#Tag Level
+ifeq ($APP_OPTIM), release)
+	MY_LOG_TAG := MY_LOG_LEVEL_ERROR
+else
+	MY_LOG_TAG := MY_LOG_LEVEL_VERBOSE
+endif
+
+CUR_COMM_FOLDER := comm
 #Jni Code
-LOCAL_SRC_FILES := jni_load.c
+LOCAL_SRC_FILES := jni_load.c \
+				   jni_load_comm.c
 
 #Comm Code
 LOCAL_SRC_FILES += $(CUR_COMM_FOLDER)/comm.c \
@@ -26,14 +37,15 @@ include $(BUILD_SHARED_LIBRARY)
 
 
 include $(CLEAR_VARS)
-CUR_TALK_FOLDER := talk
 LOCAL_MODULE    := Talk
+CUR_TALK_FOLDER := talk
 LOCAL_ARM_MODE  := arm
 LOCAL_ALLOW_UNDEFINED_SYMBOLS := true
 LOCAL_C_INCLUDES := $(TALK_C_INCLUDES)
 
 #Jni Code
-LOCAL_SRC_FILES := jni_load.c
+LOCAL_SRC_FILES := jni_load.c \
+				   jni_load_talk.c
 
 #Talk Code
 LOCAL_SRC_FILES += $(CUR_TALK_FOLDER)/arp.c \

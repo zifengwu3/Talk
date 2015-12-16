@@ -3,6 +3,10 @@ package com.qsa.talk;
 import android.annotation.SuppressLint;
 
 import android.app.Activity;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.view.View.OnClickListener;
 import android.os.Bundle;
 
@@ -15,9 +19,12 @@ import android.view.KeyEvent;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.qsa.player.lib.SerialPortService;
 import com.qsa.player.lib.SerialPortServiceForQ;
+
+import com.qsa.comm.libscomm;
 
 @SuppressLint("NewApi")
 public class Call extends Activity implements OnClickListener {
@@ -34,6 +41,7 @@ public class Call extends Activity implements OnClickListener {
 	private TextView tv_label;
 
 	private libstalk mlibstalk;
+	private libscomm mlibscomm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +51,25 @@ public class Call extends Activity implements OnClickListener {
 		init_widget_param();
 		init_a20_fm2018_param();
 
-		mlibstalk = new libstalk();
-
+		mlibstalk = new libstalk(this);
 		SerialPortService.getInstance().open(this);
-		SerialPortServiceForQ.getInstance().open(this);
+		//SerialPortServiceForQ.getInstance().open(this);
+
+		mlibscomm = new libscomm();
+		mlibscomm.open("/dev/ttyS7");
 
 		/* 显示View后才能监听按键动作 */
 		btn_call.setOnClickListener(this);
 		btn_hangup.setOnClickListener(this);
 		btn_start_video.setOnClickListener(this);
 		btn_start_audio.setOnClickListener(this);
+	}
+	
+	@Override
+	protected void onDestroy() {
+		// TODO Auto-generated method stub
+		super.onDestroy();
+		//close();
 	}
 
 	@Override
@@ -113,6 +130,68 @@ public class Call extends Activity implements OnClickListener {
 			break;
 		}
 	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		IntentFilter mFilter = new IntentFilter();
+		mFilter.addAction("callState");
+		this.registerReceiver(mReceiver, mFilter);
+	}
+	
+	private BroadcastReceiver mReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context context, Intent intent) {
+			String action = intent.getAction();
+			if (action.equals("callState")) {
+				int state = intent.getIntExtra("callStateID", 11);
+				Log.v(TAG, "callState" + state);
+				switch (state) {
+				case 3:
+					tv_label.setText("呼叫中...");
+					break;
+				case 4:
+					tv_label.setText("呼叫失败...");
+					break;
+				case 1:
+					tv_label.setText("占线中...");
+					break;
+				case 2:
+					tv_label.setText("呼叫中...");
+					break;
+				case 5:
+					tv_label.setText("通话中...");
+					//InitSurfaceView();
+					//InitMediaSharePreference();
+					//startRecord();
+					break;
+				case 6:
+					tv_label.setText("呼叫失败...");
+					break;
+				case 7:
+					Toast.makeText(Call.this, "开门中", Toast.LENGTH_SHORT)
+							.show();
+					break;
+				case 8:
+					Toast.makeText(Call.this, "开门失败", Toast.LENGTH_SHORT)
+							.show();
+					break;
+				case 9:
+					tv_label.setText("挂断成功...");
+					//stopRecord();
+					break;
+				case 10:
+					tv_label.setText("挂断失败...");
+					//stopRecord();
+					break;
+				default:
+					break;
+				}
+			}
+		}
+	};
+
 
 	private void init_widget_param() {
 		btn_call = (Button) this.findViewById(R.id.btn_call);
@@ -122,6 +201,7 @@ public class Call extends Activity implements OnClickListener {
 
 		edit_number = (EditText) this.findViewById(R.id.edt_input_number1);
 		edit_ip = (EditText) this.findViewById(R.id.edt_input_ip);
+		tv_label = (TextView) this.findViewById(R.id.txt_state);
 	}
 
 	private void init_a20_fm2018_param() {

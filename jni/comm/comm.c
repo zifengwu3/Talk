@@ -24,7 +24,7 @@ int Commfd;
 int OpenDev(char *Dev);
 int set_speed(int fd, int speed);
 int set_Parity(int fd, int databits, int stopbits, int parity);
-int OpenComm(int CommPort, int BautSpeed, int databits, int stopbits,
+int OpenComm(const char * dev, int BautSpeed, int databits, int stopbits,
 		int parity);
 int CommSendBuff(int fd, unsigned char buf[1024], int nlength);
 void CloseComm();
@@ -130,7 +130,7 @@ int set_Parity(int fd, int databits, int stopbits, int parity) {
 		options.c_cflag &= ~CSTOPB;
 		break;
 	default:
-		LOGE(stderr, "Unsupported parity\n");
+		LOGE( "Unsupported parity\n");
 		return (FALSE);
 	}
 
@@ -142,7 +142,7 @@ int set_Parity(int fd, int databits, int stopbits, int parity) {
 		options.c_cflag |= CSTOPB;
 		break;
 	default:
-		LOGE(stderr, "Unsupported stop bits\n");
+		LOGE("Unsupported stop bits\n");
 		return (FALSE);
 	}
 
@@ -168,17 +168,19 @@ int set_Parity(int fd, int databits, int stopbits, int parity) {
 	return (TRUE);
 }
 
-int OpenComm(int CommPort, int BautSpeed, int databits, int stopbits,
+int OpenComm(const char * dev, int BautSpeed, int databits, int stopbits,
 		int parity) {
-	char dev[50] = "/dev/ttyS";
 	int Commfd;
-	char serailport[50];
 
-	sprintf(dev, "/dev/ttyS%d", CommPort);
+	if (dev == NULL) {
+		return FALSE;
+	}
 	Commfd = OpenDev(dev);
 
 	if (Commfd == FALSE) {
 		return FALSE;
+	} else {
+		LOGI("Commfd = %d", Commfd);
 	}
 
 	if (set_speed(Commfd, BautSpeed) == FALSE) {
@@ -191,6 +193,7 @@ int OpenComm(int CommPort, int BautSpeed, int databits, int stopbits,
 		return FALSE;
 	}
 
+	LOGD("open comm success : %d", Commfd);
 	/*
 	 switch (CommPort)
 	 {
@@ -213,7 +216,8 @@ void CreateComm_RcvThread(int fd) {
 	pthread_attr_t attr;
 	pthread_attr_init(&attr);
 	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_DETACHED);
-	ret = pthread_create(&comm_rcvid, &attr, (void *) Comm_RcvThread, (int *) fd);
+	ret = pthread_create(&comm_rcvid, &attr, (void *) Comm_RcvThread,
+			(int *) fd);
 	pthread_attr_destroy(&attr);
 
 	LOGD("Create comm pthread!\n");
@@ -282,7 +286,7 @@ void Comm_RcvThread(int fd) {
 								m_crc += validbuff[i];
 							}
 							if (m_crc == validbuff[validlen - 1]) {
-								send_data_to_a20(validbuff);
+								//send_data_to_a20(validbuff);
 							} else {
 								LOGD("crc error\n");
 							}
@@ -303,9 +307,9 @@ void Comm_RcvThread(int fd) {
 }
 
 void CloseComm() {
-	CommRecvFlag = 0;
-	usleep(40 * 1000);
-	pthread_cancel(comm_rcvid);
+	//CommRecvFlag = 0;
+	//usleep(40 * 1000);
+	//pthread_cancel(comm_rcvid);
 	close(Commfd);
 }
 
@@ -325,6 +329,7 @@ int CommSendBuff(int fd, unsigned char buf[1024], int nlength) {
 	return nByte;
 }
 
+/*
 int Init_MultiCommThread(void) //初始化 Comm发送线程模块
 {
 	int i;
@@ -357,7 +362,7 @@ int Uninit_MultiCommThread(void) {
 //释放 Comm发送线程模块
 	multi_comm_send_flag = 0;
 	usleep(40 * 1000);
-	pthread_cancel(multi_comm_send_thread);
+	//pthread_cancel(multi_comm_send_thread);
 	sem_destroy(&multi_comm_send_sem);
 	pthread_mutex_destroy(&Local.comm_lock); //删除互斥锁
 	return 0;
@@ -386,7 +391,9 @@ void multi_comm_send_thread_func(void) {
 										Multi_Comm_Buff[i].nlength);
 
 								if (Multi_Comm_Buff[i].SendNum > 0) {
-									usleep((Multi_Comm_Buff[i].DelayTime + 100) * 1000);
+									usleep(
+											(Multi_Comm_Buff[i].DelayTime + 100)
+													* 1000);
 								}
 							}
 							Multi_Comm_Buff[i].SendNum++;
@@ -402,13 +409,15 @@ void multi_comm_send_thread_func(void) {
 					switch (Multi_Comm_Buff[i].buf[0]) {
 					case CMD_SPI_QSA_HEAD: {
 						Multi_Comm_Buff[i].isValid = 0;
-						LOGD(" COMM Send Fail, 0x%02X:: 0x%02X\n", Multi_Comm_Buff[i].buf[0], Multi_Comm_Buff[i].buf[2]);
+						LOGD(
+								" COMM Send Fail, 0x%02X:: 0x%02X\n", Multi_Comm_Buff[i].buf[0], Multi_Comm_Buff[i].buf[2]);
 					}
 						break;
 					default: //为其它命令，本次通信结束
 					{
 						Multi_Comm_Buff[i].isValid = 0;
-						LOGD("COMM Send Fail: 0x%02X\n", Multi_Comm_Buff[i].buf[0]);
+						LOGD(
+								"COMM Send Fail: 0x%02X\n", Multi_Comm_Buff[i].buf[0]);
 					}
 						break;
 					}
@@ -428,4 +437,5 @@ void multi_comm_send_thread_func(void) {
 		}
 	}
 }
+*/
 

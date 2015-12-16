@@ -5,3 +5,6 @@
 #define	CMD_SPI_RET_FAIL	        0x02  //回应失败
 //Head 
 #define CMD_SPI_QSA_HEAD			0xBD  //求实总部家居控制协议头
+
+extern int OpenComm(const char * dev, int BautSpeed, int databits, int stopbits, int parity);
+

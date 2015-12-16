@@ -16,7 +16,10 @@
  */
 
 JNIEXPORT jint JNICALL native_open(JNIEnv *env, jobject obj, jstring port) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "open comm"));
+	char * serialport;
+	serialport = Jstring2CStr(env, port);
+	LOGI("open comm : %s", serialport);
+	OpenComm(serialport, 9600, 8, 1, 'N');
 	return 1;
 }
 
@@ -26,7 +29,8 @@ JNIEXPORT jint JNICALL native_open(JNIEnv *env, jobject obj, jstring port) {
  * Signature: ()V;
  */
 JNIEXPORT void JNICALL native_close(JNIEnv *env, jobject obj) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "close comm"));
+	LOGI("close comm");
+	CloseComm();
 	return;
 }
 
@@ -36,7 +40,7 @@ JNIEXPORT void JNICALL native_close(JNIEnv *env, jobject obj) {
  * Signature: (Ljava/lang/String;)I;
  */
 JNIEXPORT jint JNICALL native_send(JNIEnv *env, jobject obj, jstring data) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "send data"));
+	LOGI("send data");
 	return 1;
 }
 
@@ -46,7 +50,7 @@ JNIEXPORT jint JNICALL native_send(JNIEnv *env, jobject obj, jstring data) {
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL native_send_thread(JNIEnv *env, jobject obj) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "send thread"));
+	LOGI(( *env )->NewStringUTF(env, "send thread"));
 	return 1;
 }
 
@@ -56,7 +60,7 @@ JNIEXPORT jint JNICALL native_send_thread(JNIEnv *env, jobject obj) {
  * Signature: ()I
  */
 JNIEXPORT jint JNICALL native_recvice_thread(JNIEnv *env, jobject obj) {
-	LOGI(TAG, ( *env )->NewStringUTF(env, "recvice thread"));
+	LOGI(( *env )->NewStringUTF(env, "recvice thread"));
 	return 1;
 }
 

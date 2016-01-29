@@ -26,11 +26,11 @@ NDK_LIB_PATH := $(NDK_BUILD_PATH)/platforms/$(APP_PLATEORM)/arch-arm/usr/lib
 APP_CFLAGS := -Wno-error=format-security
 
 
-TALK_C_INCLUDES := \
+#TALK_C_INCLUDES := \
 	$(APP_PROJECT_PATH)/include \
 	$(TALK_ROOT)/include
 
-COMM_C_INCLUDES := \
+#COMM_C_INCLUDES := \
 	$(APP_PROJECT_PATH)/include \
 	$(COMM_ROOT)/include
 	

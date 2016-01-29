@@ -35,11 +35,11 @@ extern void CloseUdpSocket(void);
 extern int Init_Udp_Send_Task(void);
 extern int Uninit_Udp_Send_Task(void);
 
-int qsa_init_main_task(int argc, char *argv[]);
+int qsa_init_main_task(void);
 void qsa_init_audio_task(void);
 void qsa_init_udp_task(void);
 
-int qsa_init_main_task(int argc, char *argv[]) {
+int qsa_init_main_task(void) {
 	pthread_attr_t attr;
 	int ch;
 	int programrun;

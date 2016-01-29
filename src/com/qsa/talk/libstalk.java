@@ -73,7 +73,5 @@ public class libstalk {
 		intent = new Intent("callState");
 		intent.putExtra("callStateID", state);
 		context.sendBroadcast(intent);
-		
 	}
-
 }

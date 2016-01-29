@@ -77,6 +77,9 @@ public class Call extends Activity implements OnClickListener {
 		// TODO Auto-generated method stub
 		int keyValue;
 		keyValue = keyCode - 7;
+		if (keyValue == 51) {
+			return false;
+		}
 		Log.v(TAG, "keycode = " + keyValue);
 		switch (keyValue) {
 		case R.integer.KEY_0:

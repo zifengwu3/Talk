@@ -1,6 +1,25 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
+CUR_COMM_FOLDER1 := qsaTalk2
+LOCAL_MODULE_CLASS := STATIC_LIBRARIES
+LOCAL_MODULE := qsa_talk
+LOCAL_ARM_MODE  := arm
+LOCAL_MODULE_TAGS := optional
+LOCAL_C_INCLUDES := $(CUR_COMM_FOLDER1)/include
+
+#Comm Code
+LOCAL_SRC_FILES := $(CUR_COMM_FOLDER1)/init.c \
+				   $(CUR_COMM_FOLDER1)/cb_function.c \
+				   $(CUR_COMM_FOLDER1)/talk.c \
+				   $(CUR_COMM_FOLDER1)/timer.c \
+				   $(CUR_COMM_FOLDER1)/udp.c
+				   
+LOCAL_LDFLAGS :=  -ldl -lm -lc  -lz -llog
+
+include $(PREBUILT_STATIC_LIBRARY) 	
+
+include $(CLEAR_VARS)
 LOCAL_MODULE := serial_port
 LOCAL_SRC_FILES := share_libs/libserial_port.so
 include $(PREBUILT_SHARED_LIBRARY) 	
